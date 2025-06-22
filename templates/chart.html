@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>테스트 원형 차트</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <h2>샘플 원형 차트 (1 / 10)</h2>
+  <svg width="300" height="300"></svg>
+
+  <script>
+    const data = [1, 9];  // 1/10, 9/10
+
+    const width = 300, height = 300, radius = Math.min(width, height) / 2;
+    const svg = d3.select("svg")
+      .append("g")
+      .attr("transform", `translate(${width / 2},${height / 2})`);
+
+    const arc = d3.arc().innerRadius(0).outerRadius(radius);
+    const pie = d3.pie();
+
+    svg.selectAll("path")
+      .data(pie(data))
+      .enter()
+      .append("path")
+      .attr("d", arc)
+      .attr("fill", (d, i) => i === 0 ? "#ff6666" : "#cccccc");
+  </script>
+</body>
+</html>
